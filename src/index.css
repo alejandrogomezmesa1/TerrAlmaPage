@@ -1639,19 +1639,19 @@ nav.scrolled .nav-toggle {
     flex-direction: column;
     position: fixed;
     top: 0;
-    right: -100%;
+    left: -100%;
     width: 290px;
     height: 100vh;
     background: var(--cream);
-    box-shadow: -10px 0 40px rgba(42, 28, 14, 0.15);
+    box-shadow: 10px 0 40px rgba(42, 28, 14, 0.15);
     padding: 100px 40px 40px;
-    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 200;
     gap: 28px;
     align-items: flex-start;
   }
   .nav-links.open {
-    right: 0;
+    left: 0;
   }
   .nav-links a {
     color: var(--brown) !important;
@@ -1694,6 +1694,19 @@ nav.scrolled .nav-toggle {
   }
   .hero h1 {
     font-size: 32px;
+  }
+  .hero-stats {
+    gap: 15px;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .hero-stat-l {
+    font-size: 9px;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+  .hero-divider {
+    height: 30px;
   }
   .port-grid,
   .test-grid {

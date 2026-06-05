@@ -82,6 +82,9 @@ export default function Navbar({ view, onBack }) {
 
   return (
     <nav id="navbar" className={`${isScrolled ? "scrolled" : ""} ${isMobileMenuOpen ? "mobile-open" : ""}`}>
+      <button className="nav-toggle" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+        <i className={isMobileMenuOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars"}></i>
+      </button>
       <a className="nav-logo" href="#" onClick={(e) => e.preventDefault()}>
         terra<span>lma</span>.co
       </a>
@@ -107,9 +110,6 @@ export default function Navbar({ view, onBack }) {
           </a>
         </li>
       </ul>
-      <button className="nav-toggle" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-        <i className={isMobileMenuOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars"}></i>
-      </button>
     </nav>
   );
 }
