@@ -1603,15 +1603,16 @@ footer {
 }
 
 /* ─── RESPONSIVE ─── */
-/* Mobile cursor hide */
-@media (max-width: 960px) {
+
+/* Hide custom cursor on touch/small screens */
+@media (hover: none), (max-width: 960px) {
   #cursor,
   #cursor-ring {
     display: none !important;
   }
 }
 
-/* Navbar toggle default hidden */
+/* Navbar toggle — default hidden on desktop */
 .nav-toggle {
   display: none;
   background: none;
@@ -1630,7 +1631,9 @@ nav.scrolled .nav-toggle {
   color: var(--brown) !important;
 }
 
+/* ── Tablet & Small Desktop ≤ 960px ── */
 @media (max-width: 960px) {
+  /* Mobile nav drawer */
   .nav-toggle {
     display: block;
   }
@@ -1642,6 +1645,7 @@ nav.scrolled .nav-toggle {
     left: -100%;
     width: 290px;
     height: 100vh;
+    height: 100dvh;
     background: var(--cream);
     box-shadow: 10px 0 40px rgba(42, 28, 14, 0.15);
     padding: 100px 40px 40px;
@@ -1667,13 +1671,39 @@ nav.scrolled .nav-toggle {
     margin-top: 10px;
   }
 
+  /* Hero — hide floating cards & badge */
   .hero-float,
   .hero-badge {
     display: none;
   }
-  .why-content,
+  .hero-content {
+    max-width: 100%;
+    margin-left: 0;
+    text-align: center;
+  }
+  .hero-sub {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-btns {
+    justify-content: center;
+  }
+  .hero-stats {
+    justify-content: center;
+  }
+
+  /* Grids — 2-col or 1-col on tablet */
+  .why-content {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .why-visual {
+    height: 300px;
+  }
   .contact-wrap {
     grid-template-columns: 1fr;
+    gap: 40px;
   }
   .port-grid {
     grid-template-columns: 1fr 1fr;
@@ -1688,38 +1718,178 @@ nav.scrolled .nav-toggle {
     grid-template-columns: 1fr;
   }
 }
+
+/* ── Mobile ≤ 600px ── */
 @media (max-width: 600px) {
+  /* Smaller section padding */
   section {
     padding: 60px 5%;
   }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
   .hero h1 {
-    font-size: 32px;
+    font-size: clamp(28px, 8vw, 36px);
+  }
+  .hero-tag {
+    font-size: 9px;
+    padding: 6px 16px;
+  }
+  .hero-sub {
+    font-size: 12px;
+    line-height: 1.75;
+  }
+  .hero-btns {
+    flex-direction: column;
+    align-items: center;
+  }
+  .btn-primary,
+  .btn-outline-white {
+    width: 100%;
+    justify-content: center;
   }
   .hero-stats {
-    gap: 15px;
+    gap: 12px;
     width: 100%;
     justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+  .hero-stat-n {
+    font-size: 24px;
   }
   .hero-stat-l {
-    font-size: 9px;
-    letter-spacing: 0.05em;
+    font-size: 8px;
+    letter-spacing: 0.04em;
     white-space: nowrap;
   }
   .hero-divider {
-    height: 30px;
+    height: 28px;
   }
-  .port-grid,
-  .test-grid {
+
+  /* Ticker */
+  .ticker-item {
+    font-size: 10px;
+    padding: 0 24px;
+  }
+
+  /* Valores */
+  .valores-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .valor-card {
+    padding: 22px 20px;
+  }
+
+  /* Portafolio */
+  .port-grid {
     grid-template-columns: 1fr;
   }
+  .port-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .port-img-ph {
+    height: 200px;
+  }
+
+  /* Counter strip */
   .counter-strip {
     grid-template-columns: 1fr 1fr;
     padding: 40px 5%;
+    gap: 14px;
+  }
+  .counter-num {
+    font-size: 34px;
+  }
+  .counter-label {
+    font-size: 9px;
+  }
+
+  /* WHY section */
+  .why-visual {
+    height: 240px;
+  }
+  .why-visual-icon {
+    font-size: 52px;
+  }
+  .wvt-big {
+    font-size: 20px;
+  }
+  .why-item {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  /* Testimonios */
+  .test-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .test-card {
+    padding: 22px 18px;
+  }
+  .test-quote {
+    font-size: 13px;
+  }
+
+  /* Contacto */
+  .contact-wrap {
+    gap: 32px;
+  }
+  .contact-channel {
+    padding: 12px 14px;
+    gap: 10px;
   }
   .form-row {
     grid-template-columns: 1fr;
   }
+
+  /* Footer */
   .footer-top {
     grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+
+  /* Section titles tighter */
+  .section-title {
+    font-size: clamp(24px, 6vw, 32px);
   }
 }
+
+/* ── Tiny screens ≤ 380px ── */
+@media (max-width: 380px) {
+  nav {
+    padding: 12px 4%;
+  }
+  nav.scrolled {
+    padding: 10px 4%;
+  }
+  .hero h1 {
+    font-size: 26px;
+  }
+  .hero-stat-n {
+    font-size: 20px;
+  }
+  .hero-stat-l {
+    font-size: 7px;
+  }
+  .counter-strip {
+    grid-template-columns: 1fr;
+  }
+  .counter-num {
+    font-size: 30px;
+  }
+  .port-info {
+    padding: 14px 16px;
+  }
+}
+

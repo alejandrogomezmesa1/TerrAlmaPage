@@ -520,6 +520,9 @@ export default function DetallePropiedad({ propertyId, onBack, onNavigateToPrope
             <div className="gallery-overlay"></div>
           </div>
           <div className="gallery-badge">Destacada</div>
+          <div className="gallery-more gallery-more-mobile">
+            <i className="fa-solid fa-images"></i> Ver {prop.photos.length} fotos
+          </div>
         </div>
         <div className="gallery-sm" onClick={() => openGallery(1)}>
           <div className="gallery-ph g2" style={{ fontSize: "42px" }}>
@@ -553,7 +556,7 @@ export default function DetallePropiedad({ propertyId, onBack, onNavigateToPrope
                 height: "100%",
                 display: "flex",
                 alignItems: "center",
-                justifycontent: "center",
+                justifyContent: "center",
               }}
               id="gmImg"
             >

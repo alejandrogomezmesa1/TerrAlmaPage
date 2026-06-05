@@ -153,6 +153,11 @@
     transform: scale(1.05)
 }
 
+/* Mobile-only gallery button: hidden on desktop where gallery-sm is visible */
+.gallery-more-mobile {
+    display: none;
+}
+
 .gallery-badge {
     position: absolute;
     top: 16px;
@@ -1271,40 +1276,102 @@
     display: none;
 }
 
-/* RESPONSIVE LAYOUT */
+/* ── RESPONSIVE LAYOUT ── */
+
+/* ── Tablet ≤ 960px ── */
 @media(max-width:960px) {
+    /* Main layout stacks */
     .detail-main {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 36px 5% 60px;
     }
 
+    /* Sidebar: unstick and limit width */
     .sidebar-sticky {
-        position: static
+        position: static;
+    }
+    .sidebar {
+        max-width: 480px;
     }
 
+    /* Gallery: reduce heights */
+    .gallery {
+        grid-template-rows: 260px 160px;
+        height: 424px;
+    }
+
+    /* Suggestions: 2 columns */
     .sug-grid {
-        grid-template-columns: repeat(2, 1fr)
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Price row wraps */
+    .prop-price-row {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    /* Tabs become scrollable */
+    .tabs {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    .tabs::-webkit-scrollbar {
+        display: none;
+    }
+    .tab {
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    /* Amenidades: 2 columns at tablet */
+    .amenidades-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /* Specs: 4 → 3 cols */
+    .specs-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Gallery modal nav: tighter */
+    .gm-nav {
+        width: calc(100% + 40px);
     }
 }
 
+/* ── Mobile ≤ 600px ── */
 @media(max-width:600px) {
+    /* Main layout padding */
+    .detail-main {
+        padding: 28px 5% 48px;
+        gap: 24px;
+    }
+
+    /* Sidebar: full width */
+    .sidebar {
+        max-width: 100%;
+    }
+
+    /* Map / Financial stack */
     .map-info-grid,
     .financial-grid {
         grid-template-columns: 1fr;
     }
 
+    /* Nav elements collapse */
     .nav-back span {
         display: none;
     }
-
     .desktop-only-text {
         display: none;
     }
-
     .mobile-only-icon {
         display: inline-block;
         font-size: 14px;
     }
-
     .nav-cta {
         padding: 0 !important;
         width: 38px;
@@ -1315,26 +1382,421 @@
         justify-content: center;
         box-shadow: none !important;
     }
+    .nav-right {
+        gap: 8px;
+    }
+    .nav-share,
+    .nav-fav {
+        width: 34px;
+        height: 34px;
+        font-size: 13px;
+    }
+
+    /* Gallery — single column, show main + "ver fotos" overlay */
+    .gallery {
+        margin-top: 60px;
+        height: auto;
+        grid-template-columns: 1fr;
+        grid-template-rows: 260px;
+        gap: 0;
+    }
+    .gallery-main {
+        grid-row: span 1;
+    }
+    .gallery-main .gallery-ph {
+        font-size: 56px;
+    }
+    .gallery-sm {
+        display: none;
+    }
+    .gallery-more-mobile {
+        display: flex;
+    }
+    .gallery-more {
+        bottom: 12px;
+        right: 12px;
+        padding: 7px 14px;
+        font-size: 10px;
+    }
+    .gallery-badge {
+        top: 12px;
+        left: 12px;
+        padding: 5px 10px;
+        font-size: 8px;
+    }
+
+    /* Property header */
+    .prop-tags {
+        gap: 6px;
+        margin-bottom: 10px;
+    }
+    .prop-tag {
+        font-size: 9px;
+        padding: 4px 10px;
+    }
+    .prop-name {
+        font-size: clamp(22px, 6vw, 32px);
+        margin-bottom: 8px;
+    }
+    .prop-loc {
+        font-size: 12px;
+        word-break: break-word;
+        margin-bottom: 14px;
+    }
+
+    /* Price row — stack vertically on mobile */
+    .prop-price-row {
+        flex-direction: column;
+        padding: 16px 18px;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    .prop-price {
+        font-size: 24px;
+    }
+    .prop-price span {
+        font-size: 12px;
+    }
+    .prop-price-sub {
+        font-size: 10px;
+    }
+    .prop-price-badge {
+        margin-left: 0;
+        font-size: 9px;
+    }
+
+    /* Specs */
+    .specs-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        margin-bottom: 24px;
+    }
+    .spec {
+        padding: 14px 10px;
+    }
+    .spec-val {
+        font-size: 14px;
+    }
+    .spec-icon {
+        font-size: 18px;
+        margin-bottom: 6px;
+    }
+    .spec-label {
+        font-size: 9px;
+    }
+
+    /* Tabs */
+    .tab {
+        padding: 10px 16px;
+        font-size: 11px;
+    }
+
+    /* Description */
+    .desc-text {
+        font-size: 13px;
+        line-height: 1.8;
+    }
+    .desc-highlight {
+        padding: 12px;
+        gap: 10px;
+    }
+    .dh-text {
+        font-size: 12px;
+    }
+
+    /* Amenidades — single column on phone */
+    .amenidades-grid {
+        grid-template-columns: 1fr;
+    }
+    .amenidad {
+        padding: 10px 12px;
+    }
+    .amenidad span {
+        font-size: 11px;
+    }
+
+    /* Map placeholder */
+    .map-placeholder {
+        height: 200px;
+        padding: 16px;
+    }
+    .map-pin {
+        font-size: 28px;
+    }
+    .map-label {
+        font-size: 12px;
+    }
+    .map-sub {
+        font-size: 10px;
+    }
+    .map-chips {
+        gap: 5px;
+        margin-top: 8px;
+    }
+    .map-chip {
+        font-size: 9px;
+        padding: 4px 8px;
+    }
+
+    /* Sidebar cards */
+    .price-card {
+        padding: 18px;
+    }
+    .pc-price {
+        font-size: 24px;
+    }
+    .pc-price span {
+        font-size: 13px;
+    }
+    .pc-note {
+        font-size: 10px;
+    }
+    .pc-btn-main {
+        padding: 13px;
+        font-size: 11px;
+    }
+    .pc-btn-wa {
+        padding: 12px;
+        font-size: 11px;
+    }
+    .pc-btn-out {
+        padding: 11px;
+        font-size: 10px;
+    }
+    .pc-feat {
+        font-size: 11px;
+    }
+
+    /* Asesor */
+    .asesor-card {
+        padding: 18px;
+    }
+    .asesor-av {
+        width: 44px;
+        height: 44px;
+        font-size: 15px;
+    }
+    .asesor-name {
+        font-size: 13px;
+    }
+    .asesor-role {
+        font-size: 10px;
+    }
+
+    /* Visita */
+    .visita-card {
+        padding: 18px;
+    }
+    .vc-title {
+        font-size: 16px;
+    }
+    .vc-slots {
+        gap: 5px;
+    }
+    .vc-slot {
+        font-size: 9px;
+        padding: 5px 10px;
+    }
+    .vc-btn {
+        padding: 11px;
+        font-size: 10px;
+    }
+
+    /* Suggestions */
+    .sugeridas {
+        padding: 40px 5% 60px;
+    }
+    .sug-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    .sug-title {
+        font-size: 22px;
+    }
+    .sug-ver-mas {
+        font-size: 10px;
+    }
+    .sug-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+    .sug-img {
+        height: 180px;
+    }
+    .sug-info {
+        padding: 14px;
+    }
+    .sug-name {
+        font-size: 12px;
+    }
+    .sug-loc {
+        font-size: 10px;
+    }
+    .sug-bottom {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    .sug-price {
+        font-size: 14px;
+    }
+    .sug-tags {
+        flex-wrap: wrap;
+    }
+    .sug-tag {
+        font-size: 8px;
+        padding: 2px 7px;
+    }
+
+    /* Gallery modal */
+    #gal-modal {
+        padding: 12px;
+    }
+    .gm-close {
+        top: 12px;
+        right: 12px;
+        width: 38px;
+        height: 38px;
+        font-size: 18px;
+    }
+    .gm-title {
+        font-size: 13px;
+        margin-bottom: 10px;
+        text-align: center;
+        padding: 0 48px;
+    }
+    .gm-main {
+        width: 100%;
+        height: min(42vh, 300px);
+        border-radius: 10px;
+    }
+    .gm-main span {
+        font-size: 72px !important;
+    }
+    .gm-nav {
+        width: 100%;
+    }
+    .gm-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 12px;
+    }
+    .gm-thumbs {
+        gap: 5px;
+        max-width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .gm-thumb {
+        width: 52px;
+        height: 40px;
+        font-size: 18px;
+    }
+    .gm-counter {
+        font-size: 10px;
+    }
+
+    /* Lightbox fallback */
+    .lb-main {
+        width: 95vw;
+        height: min(45vh, 320px);
+    }
+    .lb-prev {
+        left: -8px;
+    }
+    .lb-next {
+        right: -8px;
+    }
+    .lb-prev,
+    .lb-next {
+        width: 36px;
+        height: 36px;
+        font-size: 13px;
+    }
+}
+
+/* ── Tiny screens ≤ 380px ── */
+@media(max-width:380px) {
+    .detail-main {
+        padding: 20px 4% 40px;
+    }
 
     .gallery {
-        height: 340px;
-        grid-template-rows: 220px 120px
+        margin-top: 56px;
+        grid-template-rows: 210px;
+    }
+
+    .prop-name {
+        font-size: 20px;
+    }
+    .prop-price {
+        font-size: 20px;
+    }
+    .prop-loc {
+        font-size: 11px;
+    }
+    .prop-tag {
+        font-size: 8px;
+        padding: 3px 8px;
     }
 
     .specs-grid {
-        grid-template-columns: repeat(2, 1fr)
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+    }
+    .spec {
+        padding: 10px 6px;
+        border-radius: 10px;
+    }
+    .spec-val {
+        font-size: 12px;
+    }
+    .spec-label {
+        font-size: 8px;
+    }
+    .spec-icon {
+        font-size: 16px;
     }
 
-    .amenidades-grid {
-        grid-template-columns: 1fr 1fr
+    .tab {
+        padding: 8px 12px;
+        font-size: 10px;
     }
 
-    .sug-grid {
-        grid-template-columns: 1fr 1fr
+    .pc-price {
+        font-size: 20px;
+    }
+    .pc-feat {
+        font-size: 10px;
     }
 
-    .gm-nav {
-        width: calc(100% + 20px)
+    .vc-title {
+        font-size: 14px;
+    }
+    .vc-slot {
+        font-size: 8px;
+        padding: 4px 8px;
+    }
+
+    .sug-title {
+        font-size: 18px;
+    }
+    .sug-img {
+        height: 150px;
+    }
+
+    .gm-main {
+        height: min(38vh, 250px);
+    }
+    .gm-thumb {
+        width: 44px;
+        height: 34px;
+        font-size: 16px;
+    }
+
+    .map-placeholder {
+        height: 180px;
     }
 }
 
