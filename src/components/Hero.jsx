@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 
-export default function Hero() {
+export default function Hero({ onSelectProperty }) {
   // Generate 18 particles dynamically with randomized styles
   const particles = useMemo(() => {
     return Array.from({ length: 18 }).map(() => {
@@ -87,7 +87,7 @@ export default function Hero() {
       </div>
 
       <div className="hero-float">
-        <div className="hfc tall">
+        <div className="hfc tall" onClick={() => onSelectProperty?.("casa-alma-verde")} style={{ cursor: "pointer" }}>
           <div className="p1">
             <span className="ph-icon">🌿</span>
             <div className="prop-label">
@@ -96,7 +96,7 @@ export default function Hero() {
             </div>
           </div>
         </div>
-        <div className="hfc">
+        <div className="hfc" onClick={() => onSelectProperty?.("apto-bosque-alto")} style={{ cursor: "pointer" }}>
           <div className="p2">
             <span className="ph-icon" style={{ fontSize: "28px", top: "30%" }}>🍃</span>
             <div className="prop-label">
@@ -105,7 +105,7 @@ export default function Hero() {
             </div>
           </div>
         </div>
-        <div className="hfc">
+        <div className="hfc" onClick={() => onSelectProperty?.("loft-jardin-zen")} style={{ cursor: "pointer" }}>
           <div className="p3">
             <span className="ph-icon" style={{ fontSize: "28px", top: "30%" }}>🌱</span>
             <div className="prop-label">

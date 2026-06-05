@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-export default function Navbar() {
+export default function Navbar({ view, onBack }) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,23 +17,89 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleNavLinkClick = (e, targetId) => {
+    e.preventDefault();
+    if (view === "detail") {
+      onBack();
+      sessionStorage.setItem("scrollTarget", targetId);
+    } else {
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: "Terralma.co",
+        url: window.location.href,
+      }).catch(console.error);
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert("¡Enlace copiado al portapapeles!");
+    }
+  };
+
+  const scrollToVisita = () => {
+    const el = document.querySelector(".visita-card");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+
+  if (view === "detail") {
+    return (
+      <nav id="navbar" className="scrolled" style={{ position: "fixed" }}>
+        <button className="nav-back" onClick={onBack}>
+          <i className="fa-solid fa-arrow-left"></i> Volver
+        </button>
+        <a className="nav-logo" href="#" onClick={(e) => { e.preventDefault(); onBack(); }}>
+          terra<span>lma</span>.co
+        </a>
+        <div className="nav-right">
+          <button className="nav-share" title="Compartir" onClick={handleShare}>
+            <i className="fa-solid fa-share-nodes"></i>
+          </button>
+          <button
+            className={`nav-fav ${isFavorite ? "active" : ""}`}
+            title="Guardar"
+            onClick={() => setIsFavorite(!isFavorite)}
+          >
+            <i className={isFavorite ? "fa-solid fa-heart" : "fa-regular fa-heart"}></i>
+          </button>
+          <button className="nav-cta" onClick={scrollToVisita}>
+            Agendar visita
+          </button>
+        </div>
+      </nav>
+    );
+  }
+
   return (
     <nav id="navbar" className={isScrolled ? "scrolled" : ""}>
-      <div className="nav-logo">
+      <a className="nav-logo" href="#" onClick={(e) => e.preventDefault()}>
         terra<span>lma</span>.co
-      </div>
-      <ul class="nav-links">
+      </a>
+      <ul className="nav-links">
         <li>
-          <a href="#portafolio">Propiedades</a>
+          <a href="#portafolio" onClick={(e) => handleNavLinkClick(e, "portafolio")}>
+            Propiedades
+          </a>
         </li>
         <li>
-          <a href="#nosotros">Nosotros</a>
+          <a href="#nosotros" onClick={(e) => handleNavLinkClick(e, "nosotros")}>
+            Nosotros
+          </a>
         </li>
         <li>
-          <a href="#testimonios">Testimonios</a>
+          <a href="#testimonios" onClick={(e) => handleNavLinkClick(e, "testimonios")}>
+            Testimonios
+          </a>
         </li>
         <li>
-          <a href="#contacto" className="nav-cta">
+          <a href="#contacto" className="nav-cta" onClick={(e) => handleNavLinkClick(e, "contacto")}>
             Contáctanos
           </a>
         </li>

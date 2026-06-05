@@ -11,11 +11,13 @@ import Nosotros from "./components/Nosotros";
 import Testimonios from "./components/Testimonios";
 import Contacto from "./components/Contacto";
 import Footer from "./components/Footer";
+import DetallePropiedad from "./components/DetallePropiedad";
 
 export default function App() {
   const [loading, setLoading] = useState(true);
+  const [view, setView] = useState({ name: "home", propertyId: null });
 
-  // Setup Scroll Reveal animation observers after loading completes
+  // Setup Scroll Reveal animation observers after loading/navigation completes
   useEffect(() => {
     if (loading) return;
 
@@ -30,14 +32,40 @@ export default function App() {
       { threshold: 0.12 }
     );
 
+    // Observe elements on the home view
     const revealElements = document.querySelectorAll(
       ".reveal, .reveal-left, .reveal-right"
     );
-    
     revealElements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
-  }, [loading]);
+  }, [loading, view]);
+
+  // Handle cross-page navigation smooth scroll when returning to home view
+  useEffect(() => {
+    if (loading) return;
+
+    if (view.name === "home") {
+      const pendingTarget = sessionStorage.getItem("scrollTarget");
+      if (pendingTarget) {
+        sessionStorage.removeItem("scrollTarget");
+        setTimeout(() => {
+          const el = document.getElementById(pendingTarget);
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 150);
+      }
+    }
+  }, [loading, view]);
+
+  const selectProperty = (id) => {
+    setView({ name: "detail", propertyId: id });
+  };
+
+  const goHome = () => {
+    setView({ name: "home", propertyId: null });
+  };
 
   return (
     <>
@@ -48,15 +76,28 @@ export default function App() {
       {!loading && (
         <>
           <CustomCursor />
-          <Navbar />
-          <Hero />
-          <Ticker />
-          <Valores />
-          <Portafolio />
-          <Counters />
-          <Nosotros />
-          <Testimonios />
-          <Contacto />
+          
+          <Navbar view={view.name} onBack={goHome} />
+          
+          {view.name === "home" ? (
+            <>
+              <Hero onSelectProperty={selectProperty} />
+              <Ticker />
+              <Valores />
+              <Portafolio onSelectProperty={selectProperty} />
+              <Counters />
+              <Nosotros />
+              <Testimonios />
+              <Contacto />
+            </>
+          ) : (
+            <DetallePropiedad
+              propertyId={view.propertyId}
+              onBack={goHome}
+              onNavigateToProperty={selectProperty}
+            />
+          )}
+          
           <Footer />
         </>
       )}

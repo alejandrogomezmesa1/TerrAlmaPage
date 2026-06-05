@@ -1,0 +1,9 @@
+Verification Plan
+Manual Verification
+Compilación y Servidor de Desarrollo: Ejecutaremos npm run dev para validar que el servidor local de Vite funcione correctamente.
+Interactividad:
+Validar que el loader oculte la página y el cursor funcione de forma fluida.
+Validar que las partículas floten y el ticker funcione continuamente.
+Validar que las estadísticas numéricas se incrementen solo cuando aparezcan en pantalla.
+Validar que el formulario de contacto responda correctamente al presionar "Enviar".
+Consola: Verificar que no existan advertencias de React ni errores en la consola del navegador.

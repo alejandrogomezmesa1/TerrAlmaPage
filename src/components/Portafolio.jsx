@@ -1,6 +1,13 @@
 import React from "react";
 
-export default function Portafolio() {
+const slugify = (text) =>
+  text
+    .toLowerCase()
+    .replace(/ /g, "-")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+export default function Portafolio({ onSelectProperty }) {
   const properties = [
     {
       name: "Casa Alma Verde",
@@ -80,6 +87,7 @@ export default function Portafolio() {
           <div
             key={index}
             className={`port-card reveal reveal-delay-${prop.delay}`}
+            onClick={() => onSelectProperty?.(slugify(prop.name))}
           >
             <div className="port-img">
               <div className={`${prop.imgClass} port-img-ph`}>{prop.emoji}</div>
