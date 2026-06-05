@@ -302,6 +302,10 @@
     margin: 0 auto
 }
 
+.detail-main > div {
+    min-width: 0;
+}
+
 /* LEFT */
 .prop-header {
     margin-bottom: 28px
