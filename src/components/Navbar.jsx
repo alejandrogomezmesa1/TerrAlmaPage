@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 export default function Navbar({ view, onBack }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +20,7 @@ export default function Navbar({ view, onBack }) {
 
   const handleNavLinkClick = (e, targetId) => {
     e.preventDefault();
+    setIsMobileMenuOpen(false);
     if (view === "detail") {
       onBack();
       sessionStorage.setItem("scrollTarget", targetId);
@@ -53,7 +55,7 @@ export default function Navbar({ view, onBack }) {
     return (
       <nav id="navbar" className="scrolled" style={{ position: "fixed" }}>
         <button className="nav-back" onClick={onBack}>
-          <i className="fa-solid fa-arrow-left"></i> Volver
+          <i className="fa-solid fa-arrow-left"></i> <span>Volver</span>
         </button>
         <a className="nav-logo" href="#" onClick={(e) => { e.preventDefault(); onBack(); }}>
           terra<span>lma</span>.co
@@ -70,7 +72,8 @@ export default function Navbar({ view, onBack }) {
             <i className={isFavorite ? "fa-solid fa-heart" : "fa-regular fa-heart"}></i>
           </button>
           <button className="nav-cta" onClick={scrollToVisita}>
-            Agendar visita
+            <i className="fa-solid fa-calendar-check mobile-only-icon"></i>
+            <span className="desktop-only-text">Agendar visita</span>
           </button>
         </div>
       </nav>
@@ -78,11 +81,11 @@ export default function Navbar({ view, onBack }) {
   }
 
   return (
-    <nav id="navbar" className={isScrolled ? "scrolled" : ""}>
+    <nav id="navbar" className={`${isScrolled ? "scrolled" : ""} ${isMobileMenuOpen ? "mobile-open" : ""}`}>
       <a className="nav-logo" href="#" onClick={(e) => e.preventDefault()}>
         terra<span>lma</span>.co
       </a>
-      <ul className="nav-links">
+      <ul className={`nav-links ${isMobileMenuOpen ? "open" : ""}`}>
         <li>
           <a href="#portafolio" onClick={(e) => handleNavLinkClick(e, "portafolio")}>
             Propiedades
@@ -104,6 +107,9 @@ export default function Navbar({ view, onBack }) {
           </a>
         </li>
       </ul>
+      <button className="nav-toggle" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+        <i className={isMobileMenuOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars"}></i>
+      </button>
     </nav>
   );
 }

@@ -1603,10 +1603,70 @@ footer {
 }
 
 /* ─── RESPONSIVE ─── */
+/* Mobile cursor hide */
 @media (max-width: 960px) {
-  .nav-links {
-    display: none;
+  #cursor,
+  #cursor-ring {
+    display: none !important;
   }
+}
+
+/* Navbar toggle default hidden */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 201;
+  transition: all 0.3s;
+  padding: 8px;
+}
+nav.scrolled .nav-toggle {
+  color: var(--brown);
+}
+.mobile-open .nav-toggle {
+  color: var(--brown) !important;
+}
+
+@media (max-width: 960px) {
+  .nav-toggle {
+    display: block;
+  }
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 290px;
+    height: 100vh;
+    background: var(--cream);
+    box-shadow: -10px 0 40px rgba(42, 28, 14, 0.15);
+    padding: 100px 40px 40px;
+    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 200;
+    gap: 28px;
+    align-items: flex-start;
+  }
+  .nav-links.open {
+    right: 0;
+  }
+  .nav-links a {
+    color: var(--brown) !important;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .nav-links a::after {
+    background: var(--green);
+  }
+  .nav-links .nav-cta {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+  }
+
   .hero-float,
   .hero-badge {
     display: none;

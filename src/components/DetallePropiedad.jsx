@@ -724,7 +724,7 @@ export default function DetallePropiedad({ propertyId, onBack, onNavigateToPrope
                 ))}
               </div>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginTop: "14px" }}>
+            <div className="map-info-grid">
               <div style={{ padding: "14px", background: "var(--cream)", borderRadius: "12px", border: "1px solid var(--beige2)" }}>
                 <div style={{ fontSize: "11px", fontWeight: "700", color: "var(--brown)", textTransform: "uppercase", letterSpacing: ".08em", marginBottom: "10px" }}>
                   Lugares cercanos
@@ -756,7 +756,7 @@ export default function DetallePropiedad({ propertyId, onBack, onNavigateToPrope
 
           {/* TAB CONTENT: FINANCIAL */}
           <div id="financiero" className={`tab-content ${activeTab === "financiero" ? "active" : ""}`}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+            <div className="financial-grid">
               <div style={{ padding: "18px", background: "var(--cream)", borderRadius: "14px", border: "1px solid var(--beige2)" }}>
                 <div style={{ fontSize: "10px", fontWeight: "700", textTransform: "uppercase", letterSpacing: ".12em", color: "var(--text-muted)", marginBottom: "12px" }}>
                   Simulación de crédito
