@@ -607,10 +607,10 @@ export default function DetallePropiedad({ propertyId, onBack, onNavigateToPrope
             <div className="prop-loc">
               <i className="fa-solid fa-location-dot"></i> {prop.location}
             </div>
-            <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+            <div style={{ display: "flex", gap: "8px", alignItems: "center", flexWrap: "wrap" }}>
               <div style={{ display: "flex", gap: "2px", color: "var(--gold)", fontSize: "13px" }}>★★★★★</div>
               <span style={{ fontSize: "12px", color: "var(--text-muted)" }}>{prop.rating}</span>
-              <span style={{ fontSize: "11px", color: "var(--text-muted)", marginLeft: "8px" }}>· {prop.published}</span>
+              <span style={{ fontSize: "11px", color: "var(--text-muted)" }}>· {prop.published}</span>
             </div>
           </div>
 

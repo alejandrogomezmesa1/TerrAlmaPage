@@ -1392,36 +1392,36 @@
         font-size: 13px;
     }
 
-    /* Gallery — single column, show main + "ver fotos" overlay */
+    /* Gallery — asymmetric grid on mobile like original HTML */
     .gallery {
         margin-top: 60px;
-        height: auto;
-        grid-template-columns: 1fr;
-        grid-template-rows: 260px;
-        gap: 0;
+        height: 340px;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 220px 120px;
+        gap: 3px;
     }
     .gallery-main {
-        grid-row: span 1;
+        grid-row: span 2;
     }
     .gallery-main .gallery-ph {
         font-size: 56px;
     }
     .gallery-sm {
-        display: none;
+        display: block; /* ensure it's visible */
     }
     .gallery-more-mobile {
-        display: flex;
+        display: none; /* hide the mobile-only button since we show the real one */
     }
     .gallery-more {
-        bottom: 12px;
-        right: 12px;
-        padding: 7px 14px;
-        font-size: 10px;
+        bottom: 8px;
+        right: 8px;
+        padding: 6px 12px;
+        font-size: 9px;
     }
     .gallery-badge {
-        top: 12px;
-        left: 12px;
-        padding: 5px 10px;
+        top: 8px;
+        left: 8px;
+        padding: 4px 8px;
         font-size: 8px;
     }
 
@@ -1619,7 +1619,7 @@
         font-size: 10px;
     }
     .sug-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
         gap: 14px;
     }
     .sug-img {
@@ -1724,7 +1724,17 @@
 
     .gallery {
         margin-top: 56px;
+        grid-template-columns: 1fr;
         grid-template-rows: 210px;
+    }
+    .gallery-main {
+        grid-row: span 1;
+    }
+    .gallery-sm {
+        display: none;
+    }
+    .gallery-more-mobile {
+        display: flex;
     }
 
     .prop-name {
